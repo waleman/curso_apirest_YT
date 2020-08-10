@@ -1,3 +1,4 @@
+
 RewriteEngine On
 
 # Si la ruta no es un archivo existente, ni una carpeta
