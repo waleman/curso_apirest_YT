@@ -64,6 +64,7 @@ class conexion {
     }
 
 
+    //INSERT 
     public function nonQueryId($sqlstr){
         $results = $this->conexion->query($sqlstr);
          $filas = $this->conexion->affected_rows;
@@ -73,10 +74,6 @@ class conexion {
              return 0;
          }
     }
-
-
-
-
 
 
 
