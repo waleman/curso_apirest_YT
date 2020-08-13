@@ -1,6 +1,18 @@
 
 RewriteEngine On
 
+
+# esta lineas son para quitar la ext .php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+# esta lineas son para quitar la ext .html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html
+
+
 # Si la ruta no es un archivo existente, ni una carpeta
 # Reescribir al index
 RewriteCond %{REQUEST_FILENAME} !-f
