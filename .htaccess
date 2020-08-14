@@ -1,7 +1,6 @@
 
 RewriteEngine On
 
-
 # esta lineas son para quitar la ext .php
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
