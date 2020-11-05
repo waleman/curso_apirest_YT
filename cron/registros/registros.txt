@@ -1,0 +1,4 @@
+------------------------------------ Registros del CRON JOB ------------------------------------ 
+Se modificaron -1  el dia [2020-10-18 16:36] 
+Se modificaron 3  el dia [2020-10-18 16:39] 
+Se modificaron 2  el dia [2020-10-18 16:41] 
