@@ -1,0 +1,9 @@
+{
+    "conexion":{
+        "server" : "dpg-cjsjc2u3m8ac73d9g8c0-a.oregon-postgres.render.com",
+        "user" : "apirest_i9u3_user",
+        "password" : "p5w5TRp1QMCt6QSMbgrTEcGuToYa6ItS",
+        "database" : "apirest_i9u3",
+        "port": "5432"
+    }
+}

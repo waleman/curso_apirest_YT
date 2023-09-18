@@ -21,8 +21,13 @@ class conexion {
             $this->database = $value['database'];
             $this->port = $value['port'];
         }
-        $this->conexion = new mysqli($this->server,$this->user,$this->password,$this->database,$this->port);
-        if($this->conexion->connect_errno){
+
+
+        $connStr = "host=".$this->server." port=".$this->port." dbname=".$this->database." user=".$this->user." password=".$this->password;
+        //$this->conexion = new mysqli($this->server,$this->user,$this->password,$this->database,$this->port);
+        $this->conexion =   pg_connect($connStr);
+        
+        if(!$this->conexion){
             echo "algo va mal con la conexion";
             die();
         }
@@ -39,40 +44,44 @@ class conexion {
     private function convertirUTF8($array){
         array_walk_recursive($array,function(&$item,$key){
             if(!mb_detect_encoding($item,'utf-8',true)){
-                $item = utf8_encode($item);
+                $item =  mb_convert_encoding($item, "UTF-8", mb_detect_encoding($item));
             }
         });
         return $array;
+ 
     }
 
 
     public function obtenerDatos($sqlstr){
-        $results = $this->conexion->query($sqlstr);
-        $resultArray = array();
-        foreach ($results as $key) {
-            $resultArray[] = $key;
-        }
-        return $this->convertirUTF8($resultArray);
-
+        $resultArray = Array();
+        $results = pg_query($this->conexion,$sqlstr);
+        $data = pg_fetch_all($results);
+        return  $this->convertirUTF8($data);
     }
 
 
 
     public function nonQuery($sqlstr){
-        $results = $this->conexion->query($sqlstr);
-        return $this->conexion->affected_rows;
+        //$results = $this->conexion->query($sqlstr);
+        $results = pg_query($this->conexion,$sqlstr);
+        //return $this->conexion->affected_rows;
+        return  pg_num_rows($results);
     }
 
 
     //INSERT 
     public function nonQueryId($sqlstr){
-        $results = $this->conexion->query($sqlstr);
-         $filas = $this->conexion->affected_rows;
+         //$results = $this->conexion->query($sqlstr);
+         $results = pg_query($this->conexion,$sqlstr);
+         //$filas = $this->conexion->affected_rows;
+         $filas =  pg_num_rows($results);
          if($filas >= 1){
-            return $this->conexion->insert_id;
+            $resultados = pg_fetch_array($results);
+            return  $resultados[0];
          }else{
              return 0;
          }
+
     }
      
     //encriptar

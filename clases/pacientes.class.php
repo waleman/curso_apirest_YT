@@ -25,13 +25,15 @@ class pacientes extends conexion {
             $inicio = ($cantidad * ($pagina - 1)) +1 ;
             $cantidad = $cantidad * $pagina;
         }
-        $query = "SELECT PacienteId,Nombre,DNI,Telefono,Correo FROM " . $this->table . " limit $inicio,$cantidad";
+        $query = "SELECT PacienteId,Nombre,DNI,Telefono,Correo FROM " . $this->table . " ORDER BY PacienteId limit  $cantidad";
+        //echo $query;
         $datos = parent::obtenerDatos($query);
         return ($datos);
     }
 
     public function obtenerPaciente($id){
         $query = "SELECT * FROM " . $this->table . " WHERE PacienteId = '$id'";
+        //echo $query;
         return parent::obtenerDatos($query);
 
     }

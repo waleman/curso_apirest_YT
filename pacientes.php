@@ -12,14 +12,17 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
         $pagina = $_GET["page"];
         $listaPacientes = $_pacientes->listaPacientes($pagina);
         header("Content-Type: application/json");
-        echo json_encode($listaPacientes);
+        $json = json_encode($listaPacientes);
+        echo $json;
         http_response_code(200);
     }else if(isset($_GET['id'])){
         $pacienteid = $_GET['id'];
         $datosPaciente = $_pacientes->obtenerPaciente($pacienteid);
         header("Content-Type: application/json");
-        echo json_encode($datosPaciente);
+        $json = json_encode($datosPaciente);
+        echo $json;
         http_response_code(200);
+       
     }
     
 }else if($_SERVER['REQUEST_METHOD'] == "POST"){
